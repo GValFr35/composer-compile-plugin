@@ -1,5 +1,5 @@
 {
-    "name": "civicrm/composer-compile-plugin",
+    "name": "gvalfr35/composer-compile-plugin",
     "description": "Define a 'compile' event for all packages in the dependency-graph",
     "type": "composer-plugin",
     "license": "MIT",
