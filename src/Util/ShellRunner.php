@@ -19,6 +19,9 @@ class ShellRunner
      */
     public function run($cmd)
     {
+        // On BOA server, @php cmd exit with code status 1... but php cmd works. ?!
+        $cmd = str_replace('@', '', $cmd);
+
         $d = new EventDispatcher($this->composer, $this->io);
         $d->addListener('shell-runner', $cmd);
         $d->dispatch('shell-runner', new Event('shell-runner'));

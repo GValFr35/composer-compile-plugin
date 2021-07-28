@@ -57,7 +57,7 @@ class ComposerPassthru
     public function run($callable)
     {
         $parts = [
-          $this->getPhpExecCommand(),
+          "php",//$this->getPhpExecCommand(), - execute /path/tp/bin/php failed on BOA Server (exit code 1). permission!? Use php cmd works. 
           escapeshellarg(getenv('COMPOSER_BINARY')),
           implode(' ', $this->options),
           substr($callable, 9)
