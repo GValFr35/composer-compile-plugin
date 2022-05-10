@@ -40,8 +40,10 @@ class MultiStepTaskTest extends IntegrationTestCase
                       '@php -r \'echo "MARK: PHPCMD\n";\'',
                       '@php-eval echo "MARK: PHPEVAL\\n";',
                       '@php-script example-script.php and stuff',
+                      '@export BASIC=stuff',
                       '@export MISSING={{pkg:test/m-i-s-s-i-n-g}} COMPLG={{pkg:civicrm/composer-compile-plugin}}',
                       '@export SELF={{pkg:test/multi-step-task-test}}',
+                      '@sh echo "MARK: Basic is \'$BASIC\'"',
                       '@sh echo "MARK: Missing package is \'$MISSING\'"',
                       '@sh echo "MARK: Test package is \'$SELF\'"',
                       '@sh echo "MARK: Compile plugin is \'$COMPLG\'"',
@@ -61,7 +63,7 @@ class MultiStepTaskTest extends IntegrationTestCase
         ];
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::initTestProject(static::getComposerJson());
@@ -82,9 +84,9 @@ class MultiStepTaskTest extends IntegrationTestCase
             implode("\n", [
                 '<' . '?php',
                 'class MultistepEx {',
-                'function doFirst($task){ echo "MARK: PHP FIRST\n"; if (getenv("ERROR_PHP_1")){ exit(1); } }',
-                'function doSecond($task){ echo "MARK: PHP SECOND\n"; if (getenv("ERROR_PHP_2")){ exit(1); } }',
-                'function doThird($task){ echo "MARK: PHP THIRD\n"; if (getenv("ERROR_PHP_3")){ exit(1); } }',
+                'public static function doFirst($task){ echo "MARK: PHP FIRST\n"; if (getenv("ERROR_PHP_1")){ exit(1); } }',
+                'public static function doSecond($task){ echo "MARK: PHP SECOND\n"; if (getenv("ERROR_PHP_2")){ exit(1); } }',
+                'public static function doThird($task){ echo "MARK: PHP THIRD\n"; if (getenv("ERROR_PHP_3")){ exit(1); } }',
                 '}',
             ])
         );
@@ -106,6 +108,7 @@ class MultiStepTaskTest extends IntegrationTestCase
             "^MARK: PHPCMD",
             "^MARK: PHPEVAL",
             "^MARK: PHPSCRIPT and stuff WITH-AUTOLOAD WITH-TASK",
+            "^MARK: Basic is \'stuff\'",
             '^MARK: Missing package is \'\'$',
             '^MARK: Test package is \'' . realpath(self::getTestDir()) . '\'',
             '^MARK: Compile plugin is \'' . realpath(self::getTestDir()) . '/vendor/civicrm/composer-compile-plugin\'',
