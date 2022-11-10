@@ -1,5 +1,5 @@
 {
-    "name": "civicrm/composer-compile-plugin",
+    "name": "gvalfr35/composer-compile-plugin",
     "description": "Define a 'compile' event for all packages in the dependency-graph",
     "type": "composer-plugin",
     "license": "MIT",
@@ -13,6 +13,9 @@
         "platform": {
             "php": "7.2"
         }
+    },
+    "replace": {
+        "civicrm/composer-compile-plugin": "0.19"
     },
     "require": {
         "composer-plugin-api": "^1.1 || ^2.0",
