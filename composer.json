@@ -9,13 +9,8 @@
             "email": "info@civicrm.org"
         }
     ],
-    "config": {
-        "platform": {
-            "php": "7.2"
-        }
-    },
     "replace": {
-        "civicrm/composer-compile-plugin": "0.19"
+        "civicrm/composer-compile-plugin": "0.20"
     },
     "require": {
         "composer-plugin-api": "^1.1 || ^2.0",
