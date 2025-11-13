@@ -20,6 +20,7 @@ class CivicrmAssetTest extends ScssPhpMethodTest
         $json = parent::getComposerJson();
         $json['name'] = 'test/civicrm-asset-test';
         $json['require']['civicrm/civicrm-asset-plugin'] = '@stable';
+        $json['require']['sabberworm/php-css-parser'] = '@stable';
         $json['extra']['civicrm-asset']['path'] = 'web/civi';
         $json['config']['allow-plugins']['civicrm/civicrm-asset-plugin'] = true;
         return $json;
@@ -27,7 +28,7 @@ class CivicrmAssetTest extends ScssPhpMethodTest
 
     public function testComposerInstall()
     {
-        $this->assertFileNotExists('web/civi/org.example.scssmethodtest/build.css');
+        $this->assertFileDoesNotExist('web/civi/org.example.scssmethodtest/build.css');
         parent::testComposerInstall();
         $this->assertSameCssFile('vendor/test/scss-method/build.css-expected', 'web/civi/org.example.scssmethodtest/build.css');
     }

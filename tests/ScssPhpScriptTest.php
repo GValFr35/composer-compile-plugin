@@ -21,6 +21,7 @@ class ScssPhpScriptTest extends IntegrationTestCase
             'name' => 'test/patch-test',
             'require' => [
                 'test/scss-script' => '@dev',
+                'sabberworm/php-css-parser' => '@stable',
             ],
             'minimum-stability' => 'dev',
         ];
@@ -37,7 +38,7 @@ class ScssPhpScriptTest extends IntegrationTestCase
      */
     public function testComposerInstall()
     {
-        $this->assertFileNotExists('vendor/test/scss-script/build.css');
+        $this->assertFileDoesNotExist('vendor/test/scss-script/build.css');
 
         PH::runOk('COMPOSER_COMPILE=1 composer install -v');
 

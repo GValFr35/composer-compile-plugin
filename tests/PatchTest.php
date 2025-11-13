@@ -24,7 +24,7 @@ class PatchTest extends IntegrationTestCase
             'require' => [
                 'civicrm/composer-compile-plugin' => '@dev',
                 'test/cherry-jam' => '@dev',
-                'cweagans/composer-patches' => '*',
+                'cweagans/composer-patches' => '~1.7',
             ],
             'minimum-stability' => 'dev',
             'extra' => [
@@ -64,7 +64,7 @@ class PatchTest extends IntegrationTestCase
    */
     public function testComposerInstall()
     {
-        $this->assertFileNotExists('vendor/test/cherry-jam/jam.out');
+        $this->assertFileDoesNotExist('vendor/test/cherry-jam/jam.out');
 
         PH::runOk('COMPOSER_COMPILE=1 composer install -v');
 
